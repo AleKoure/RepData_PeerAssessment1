@@ -57,22 +57,22 @@ library(lubridate)
 Data$date <-ymd(Data$date)
 ```
 
-##Mean steps per day
+##Total steps per day
 
-Then, we calculate the mean steps for each day using the tapply function. The later will give back a vector with the mean values for each day. It is straightforward to observe the frequency of the observations by plotting also a histogram.
+Then, we calculate the total steps for each day using the tapply function. The later will give back a vector with the total values for each day. It is straightforward to observe the frequency of the observations by plotting also a histogram.
 
 
 ```r
-dm <- with(Data, tapply(steps, date, mean))
+dm <- with(Data, tapply(steps, date, sum))
 
 hist(dm, col = "red", 
-       main = "Mean Steps per Day", 
+       main = "Total Steps per Day", 
        xlab = "Steps per Day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
-From the histogram we observe that we have an almost normal distribution with a pick little less than 40 steps. Indeed, taking the summary of the previous distribution we get
+From the histogram we observe that we have an almost normal distribution with a pick between 10.000 and 15.000 steps. Indeed, taking the summary of the previous distribution we get
 
 
 ```r
@@ -81,10 +81,10 @@ summary(dm)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##  0.1424 30.7000 37.3800 37.3800 46.1600 73.5900       8
+##      41    8841   10760   10770   13290   21190       8
 ```
 
-Hence, it is evident that the distribution is symmetric since the median value is equal to the mean value.
+Hence, it is evident that the distribution is symmetric since the median value is almost equal to the mean value.
 
 ##Average daily activity pattern
 
@@ -166,14 +166,14 @@ head(DataR)
 ```
 It is evident that in the new data frame the missing values have been replaced.
 
-We calculate again the average number of steps for each day to investigate the inpact of the replaced missing values.
+We calculate again the average number of total steps for each day to investigate the inpact of the replaced missing values.
 
 
 ```r
-dmR <- with(DataR, tapply(steps, date, mean))
+dmR <- with(DataR, tapply(steps, date, sum))
 
 hist(dmR, col = "red", 
-       main = "Mean Steps per Day", 
+       main = "Total Steps per Day", 
        xlab = "Steps per Day")
 ```
 
@@ -186,9 +186,9 @@ summary(dmR)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.1424 34.0900 37.3800 37.3800 44.4800 73.5900
+##      41    9819   10770   10770   12810   21190
 ```
-It is evident that the mean and the median remain unchanged. Thus the expectation value is the same and the distribution remains normal. However, compering the new values of the 1st and the 3rd quarter with the old ones, we confirm that we get a smaller variance. 
+It is evident that the mean and the median are almost the same. Thus the expectation value is the same and the distribution remaremains normal. However, compering the new values of the 1st and the 3rd quarter with the old ones, we confirm that we get a smaller variance. 
 
 ##Actinity Patterns(Weeksays Vs Weekends)
 
